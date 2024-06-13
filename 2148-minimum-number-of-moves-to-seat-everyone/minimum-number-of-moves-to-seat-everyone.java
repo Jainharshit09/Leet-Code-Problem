@@ -23,7 +23,7 @@ class Solution {
             }
 
         int moves=Math.min(sa[i],st[j]);
-        ans+=moves * Math.abs(i - j);
+        ans+=moves*Math.abs(i - j);
         sa[i]-=moves;
         st[j]-=moves;
      }
