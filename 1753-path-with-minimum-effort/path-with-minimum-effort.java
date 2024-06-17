@@ -27,9 +27,7 @@ class Solution {
             Pair curr=pq.poll();
             int x=curr.x;
             int y=curr.y;
-            if(x==n-1 && y==m-1){
-                return effort[n-1][m-1];
-            }
+           
             for(int []dir:direction){
                 int new_x=x+dir[0];
                 int new_y=y+dir[1];
