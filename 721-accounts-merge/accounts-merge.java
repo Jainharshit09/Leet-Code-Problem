@@ -3,7 +3,7 @@
 class Solution {
     public int find(int parent[], int x) {
         if (parent[x] != x) {
-            parent[x] = find(parent, parent[x]); // path compression
+            parent[x] = find(parent, parent[x]); 
         }
         return parent[x];
     }
@@ -29,15 +29,12 @@ class Solution {
         int[] rank = new int[n];
         HashMap<String, Integer> mail = new HashMap<>();
         List<String> names = new ArrayList<>();
-        
-        // Step 1: Initialize parent and rank arrays
         for (int i = 0; i < n; i++) {
             parent[i] = i;
             rank[i] = 0;
-            names.add(accounts.get(i).get(0)); // add names to the list
+            names.add(accounts.get(i).get(0));
         }
         
-        // Step 2: Union-find to group accounts by common emails
         for (int i = 0; i < n; i++) {
             List<String> account = accounts.get(i);
             List<String> emails = account.subList(1, account.size());
@@ -50,30 +47,26 @@ class Solution {
                 }
             }
         }
-        
-        // Step 3: Construct the result
-        HashMap<Integer, TreeSet<String>> mergedAccounts = new HashMap<>();
-        
-        for (int i = 0; i < n; i++) {
-            int root = find(parent, i);
-            TreeSet<String> emailSet = mergedAccounts.getOrDefault(root, new TreeSet<>());
-            List<String> account = accounts.get(i);
-            emailSet.addAll(account.subList(1, account.size()));
-            mergedAccounts.put(root, emailSet);
+        ArrayList<String>[] mergedmail=new ArrayList[n];
+        for(int i=0;i<n;i++){
+            mergedmail[i]=new ArrayList<>();
+            for(Map.Entry<String,Integer> it:mail.entrySet()){
+                String email=it.getKey();
+                int node=it.getValue();
+                 if (find(parent, node) == i){
+                     mergedmail[i].add(email);
+                }
+            }
         }
-        
-        List<List<String>> ans = new ArrayList<>();
-        
-        for (int root : mergedAccounts.keySet()) {
-            List<String> emailList = new ArrayList<>(mergedAccounts.get(root));
-            Collections.sort(emailList); // sort emails as required
-            String name = names.get(root);
-            List<String> entry = new ArrayList<>();
-            entry.add(name);
-            entry.addAll(emailList);
-            ans.add(entry);
+    List<List<String>> ans=new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+        if (mergedmail[i].size() == 0) continue;
+        Collections.sort(mergedmail[i]);
+        List<String> nameAndEmails = new ArrayList<>();
+        nameAndEmails.add(accounts.get(i).get(0));
+        nameAndEmails.addAll(mergedmail[i]);
+        ans.add(nameAndEmails);
         }
-        
         return ans;
     }
 }
