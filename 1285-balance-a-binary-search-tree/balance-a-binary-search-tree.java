@@ -47,11 +47,11 @@ class Solution {
         }
         ArrayList<Integer> arr=new ArrayList<>();
         inorder(root,arr);
-        // int left=height(root.left);
-        // int right=height(root.right);
-        // if(Math.abs(left-right)<=1){
-        //     return root;
-        // }
+        int left=height(root.left);
+        int right=height(root.right);
+        if(Math.abs(left-right)<1){
+            return root;
+        }
        int[] ans = arr.stream().mapToInt(i -> i).toArray();
         return solve(0,ans.length-1,ans);
     }
