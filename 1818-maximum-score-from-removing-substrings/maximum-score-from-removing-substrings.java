@@ -12,12 +12,12 @@ class Solution {
                 ans+=x;
             }
         }
-        StringBuilder rem = new StringBuilder();
+        str.setLength(0);
         while(!s.isEmpty()){
-            rem.append(s.pop());
+            str.append(s.pop());
         }
-        rem=rem.reverse();
-        for(char ch:rem.toString().toCharArray()){
+        str=str.reverse();
+        for(char ch:str.toString().toCharArray()){
              s.push(ch);
             if(s.size()>=2 && s.get(s.size() - 2)==second && s.peek()==first){
                 s.pop();
