@@ -18,30 +18,14 @@ class Solution {
                 map.put(arr[i],map.get(arr[i])+1);
             }
         }
-        int i=0;
-        while(map.size()!=0){
-            if(map.containsKey(0)){
-              int count=map.get(0);
-              for(int j=0;j<count;j++){
-                 arr[i++]=0;
-              }
-              map.remove(0);
+        int index=0;
+        for(int i=0;i<3;i++){
+            if(map.containsKey(i)){
+                int count=map.get(i);
+                for(int j=0;j<count;j++){
+                    arr[index++]=i;
+                }
             }
-            else if(map.containsKey(1)){
-                 int count=map.get(1);
-              for(int j=0;j<count;j++){
-                 arr[i++]=1;
-              }
-              map.remove(1);
-            }
-            else{
-                int count=map.get(2);
-              for(int j=0;j<count;j++){
-                 arr[i++]=2;
-              }
-              map.remove(2);
-            }
-
         }
     }
 }
