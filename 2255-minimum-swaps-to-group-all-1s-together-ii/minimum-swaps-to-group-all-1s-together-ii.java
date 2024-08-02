@@ -18,7 +18,7 @@ class Solution {
         int maxCount=0;
         int count=0;
         while(j<2*nums.length){
-            if(temp[j]==1){
+            if(nums[j%nums.length]==1){
                 count++;
             }
             if(j-i+1<k){
@@ -26,7 +26,7 @@ class Solution {
             }
             else if(j-i+1==k){
                 maxCount=Math.max(count,maxCount);
-                if(temp[i]==1){
+                if(nums[i%nums.length]==1){
                     count--;
                 }
                 i++;
