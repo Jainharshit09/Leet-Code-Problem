@@ -3,21 +3,21 @@ class KthLargest {
     int v;
     public KthLargest(int k, int[] nums) {
         v=k;
-      pq=new PriorityQueue<>(v);
-      for(int i=0;i<nums.length;i++){
-        pq.add(nums[i]);
-        if(pq.size()>v){
-            pq.poll();
+       pq= new PriorityQueue<>();
+        for(int i=0;i<nums.length;i++){
+            pq.add(nums[i]);
+            if(pq.size()>v){
+                pq.poll();
+            }
         }
-      }
     }
     
     public int add(int val) {
         pq.add(val);
-        if(pq.size()>v){
-            pq.poll();
-        }
-        return pq.peek();
+          if(pq.size()>v){
+                pq.poll();
+            }
+            return pq.peek();
     }
 }
 
