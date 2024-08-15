@@ -1,6 +1,5 @@
 class Solution {
     public boolean lemonadeChange(int[] arr) {
-        int ans[]=new int[3];
         int five=0;
         int ten=0;
         for(int i=0;i<arr.length;i++){
