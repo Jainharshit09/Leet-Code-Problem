@@ -7,7 +7,7 @@ class Solution {
             sum+=rolls[i];
         }
         int remain=overall-sum;
-        if(n>remain || 6*n<remain){
+        if(n>remain ||6*n<remain){
             return new int[0];
         }
         int result[]=new int[n];
