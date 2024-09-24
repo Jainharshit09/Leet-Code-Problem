@@ -1,35 +1,50 @@
-// class TrieNode{
- //     TrieNode[] children=new TrieNode[10];
- //     public TrieNode(){
- //         for(int i=0;i<9;i++){
- //             children[i]=null;
- //         }
- //     }
- // }
+class TrieNode {
+    TrieNode[] children = new TrieNode[10];
+}
+
 class Solution {
-    public int longestCommonPrefix(int[] arr1, int[] arr2) {
-     Set<Integer> set=new HashSet<>();
-     int ans=0;
-     for(int i=0;i<arr1.length;i++){
-        String str = String.valueOf(arr1[i]);
-        int n = 0;
-        for (int j = 0; j < str.length(); j++){
-            char ch = str.charAt(j);
-            n = n * 10 + (ch - '0');
-            set.add(n);
+    public TrieNode getNode() {
+        return new TrieNode();
+    }
+
+    public void insert(int n, TrieNode root) {
+        TrieNode temp=root;
+        String num=Integer.toString(n);
+        for (char ch : num.toCharArray()){
+            int idx=ch-'0';
+            if(temp.children[idx]==null){
+                temp.children[idx]=getNode();
+            }
+            temp=temp.children[idx];
         }
-     }
-     for(int i=0;i<arr2.length;i++){
-        String str = String.valueOf(arr2[i]);
-        int n=0;
-        for(int j=0;j<str.length();j++){
-            char ch=str.charAt(j);
-            n = n * 10 + (ch - '0'); 
-            if(set.contains(n)){
-                ans=Math.max(ans,j+1);
+    }
+
+    public int search(int n, TrieNode root) {
+        TrieNode temp=root;
+        String num=Integer.toString(n);
+        int length=0;
+        for(char ch:num.toCharArray()){
+            int idx=ch-'0';
+            if(temp.children[idx]!=null){
+                length++;
+                temp=temp.children[idx];
+            }
+            else{
+                break;
             }
         }
-     }
-     return ans;
+        return length;
+    }
+
+    public int longestCommonPrefix(int[] arr1, int[] arr2) {
+        TrieNode root = getNode();
+        for (int num : arr1) {
+            insert(num, root);
+        }
+        int result = 0;
+        for (int val : arr2) {
+            result = Math.max(result, search(val, root));
+        }
+        return result;
     }
 }
