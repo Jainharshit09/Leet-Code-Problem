@@ -1,5 +1,8 @@
 class Solution {
     public void solve(String s,int idx,HashSet<String> set,int currCount,int maxcount[]){
+           if(currCount + (s.length() - idx) <= maxcount[0]) {
+            return;
+        }
         if(idx==s.length()){
              maxcount[0]=Math.max(maxcount[0],currCount);
              return;
