@@ -15,12 +15,17 @@ class Solution {
         return dp[i][j]=right+down;
     }
     public int uniquePaths(int m, int n) {
-        dp=new int[m+1][n+1];
+        dp=new int[m][n];
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
-                dp[i][j]=-1;
+                if(i==0 ||j==0){
+                    dp[i][j]=1;
+                }
+                else{
+                    dp[i][j]=dp[i-1][j]+dp[i][j-1];
+                }
             }
         }
-        return solve(0,0,m,n);
+        return dp[m-1][n-1];
     }
 }
