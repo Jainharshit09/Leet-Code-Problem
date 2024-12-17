@@ -6,31 +6,31 @@ class Solution {
             int ch = s.charAt(i) - 'a';
             count[ch]++;
         }
-        StringBuilder str = new StringBuilder();
-        int i=25;
-       while(i>=0) {
-            int freq = count[i];
-            if (freq == 0) {
-                i--;
-                continue;
-            }
-            int c = Math.min(freq, repeatLimit);
-            for (int j = 0; j < c; j++) {
-                str.append((char) (i + 'a'));
-            }
-            count[i] -= c;
+         PriorityQueue<Character> pq = new PriorityQueue<>((a, b) -> b - a);
+        for (int i = 0; i < 26; i++) {
             if (count[i] > 0) {
-                int prev = i - 1;
-                while (prev >= 0 && count[prev] == 0) {
-                    prev--;
-                }
-                if (prev < 0) {
-                    break;
-                }
-                str.append((char) (prev + 'a'));
-                count[prev]--;
-            } 
+                pq.offer((char) ('a' + i));
+            }
         }
-        return str.toString();
+        StringBuilder result = new StringBuilder();
+        while(!pq.isEmpty()){
+            char ch = pq.poll(); 
+            int freq = Math.min(count[ch - 'a'], repeatLimit); 
+            for (int i = 0; i < freq; i++) {
+                result.append(ch);
+            }
+            count[ch - 'a'] -= freq;
+            if (count[ch - 'a'] > 0 && !pq.isEmpty()){
+                  char nextChar = pq.poll();
+                   result.append(nextChar);
+                    count[nextChar - 'a']--;
+                    if (count[nextChar - 'a'] > 0) {
+                    pq.offer(nextChar);
+                }
+                 pq.offer(ch);
+            }
+        }
+        return result.toString();
+        
     }
 }
