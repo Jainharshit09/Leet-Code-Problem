@@ -1,38 +1,24 @@
 class Solution {
-    public int solve(int[] days, int[] cost, int n, int i, int[] memo) {
-        if (i >= n) {
-            return 0;
-        }
-        if (memo[i] != -1) {
-            return memo[i];
-        }
-
-        int day1 = cost[0] + solve(days, cost, n, i + 1, memo);
-
-        int j = i;
-        int max_day = days[i] + 7;
-        while (j < n && days[j] < max_day) {
-            j++;
-        }
-        int day7 = cost[1] + solve(days, cost, n, j, memo);
-
-        int k = i;
-        int max_day_30 = days[i] + 30;
-        while (k < n && days[k] < max_day_30) {
-            k++;
-        }
-        int day30 = cost[2] + solve(days, cost, n, k, memo);
-
-        memo[i] = Math.min(day1, Math.min(day7, day30));
-        return memo[i];
-    }
-
     public int mincostTickets(int[] days, int[] costs) {
-        int n = days.length;
-        int[] memo = new int[n];
-        for (int i = 0; i < n; i++) {
-            memo[i] = -1;
+        int n=days.length;
+        int dp[]=new int[days[n-1]+1];
+        dp[0]=0;
+        int lastday=days[n-1];
+        Set<Integer>set=new HashSet<>();
+        for(int value:days){
+            set.add(value);
         }
-        return solve(days, costs, n, 0, memo);
+        for(int i=1;i<=lastday;i++){
+            if(!set.contains(i)){
+                dp[i] = dp[i - 1];
+                continue;
+            }
+            dp[i]=Integer.MAX_VALUE;
+            int day1=costs[0]+dp[i-1];
+            int day7=(i >= 7 ? dp[i - 7] : 0) + costs[1];
+            int day30=(i >= 30 ? dp[i - 30] : 0) + costs[2];
+            dp[i]=Math.min(day1,Math.min(day7,day30));
+        }
+        return dp[lastday];
     }
 }
