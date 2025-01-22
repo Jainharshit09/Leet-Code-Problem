@@ -1,14 +1,14 @@
 class Solution {
-    public void solve(int[][]arr,int n,int m,int ans[][]){
+    public void solve(int[][]arr,int n,int m){
         Queue<int[]>pq=new LinkedList<>();
         for(int l=0;l<n;l++){
             for(int r=0;r<m;r++){
                 if(arr[l][r]==1){
                     pq.add(new int[]{l,r});
-                    ans[l][r]=0;
+                    arr[l][r]=0;
                 }
                 else{
-                    ans[l][r]=-1;
+                    arr[l][r]=-1;
                 }
             }
         }
@@ -22,8 +22,8 @@ class Solution {
                     for(int dir[]:dirs){
                         int i_=i+dir[0];
                         int j_=j+dir[1];
-                         if(i_>=0  && i_<n && j_>=0 && j_<m && ans[i_][j_]==-1 ){
-                            ans[i_][j_]=ans[i][j]+1;
+                         if(i_>=0  && i_<n && j_>=0 && j_<m && arr[i_][j_]==-1 ){
+                            arr[i_][j_]=arr[i][j]+1;
                             pq.add(new int[]{i_,j_});
                          }
                     }
@@ -34,7 +34,7 @@ class Solution {
         int n=arr.length;
         int m=arr[0].length;
         int ans[][]=new int[n][m];
-        solve(arr,n,m,ans);
-        return ans;
+        solve(arr,n,m);
+        return arr;
     }
 }
