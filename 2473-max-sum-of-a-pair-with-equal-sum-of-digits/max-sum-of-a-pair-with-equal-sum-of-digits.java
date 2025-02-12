@@ -8,24 +8,17 @@ class Solution {
         return sum;
     }
     public int maximumSum(int[] nums) {
-        int n=nums.length;
-        HashMap<Integer,PriorityQueue<Integer>> map=new HashMap<>();
-        for(int i=0;i<n;i++){
-            int sum=find(nums[i]);
-            map.putIfAbsent(sum, new PriorityQueue<>());
-            map.get(sum).add(nums[i]);
-            if(map.get(sum).size()>2){
-                      map.get(sum).poll();
-            }
+      int arr[]=new int[82];
+      int result = -1;
+      Arrays.fill(arr,0);
+      int n=nums.length;
+      for(int i=0;i<n;i++){
+        int sum=find(nums[i]);
+        if(arr[sum]>0){
+             result = Math.max(result, nums[i] + arr[sum]);
         }
-        int ans=Integer.MIN_VALUE;
-        for (PriorityQueue<Integer> pq : map.values()){
-                if (pq.size() == 2) {
-                int first = pq.poll();
-                int second = pq.poll();
-                ans = Math.max(ans, first + second);
-            }
-        }
-        return ans == Integer.MIN_VALUE ? -1 : ans;
+        arr[sum]=Math.max(arr[sum],nums[i]);
+      }
+      return result;
     }
 }
