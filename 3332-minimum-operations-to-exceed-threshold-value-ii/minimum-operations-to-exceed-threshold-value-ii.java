@@ -6,7 +6,7 @@ class Solution {
         for(int i=0;i<n;i++){
             pq.add((long)(nums[i]));
         }
-        while(pq.peek()<k){
+        while(!pq.isEmpty() && pq.peek()<k && pq.size()>=2){
             long first=pq.poll();
             long second=pq.poll();
             long value=Math.min(first,second)*2+Math.max(first,second);
