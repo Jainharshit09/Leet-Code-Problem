@@ -1,30 +1,23 @@
 class Solution {
-     int n;
-     public boolean solve(String tiles,StringBuilder curr,Set<String>set ,boolean used[]){
-        set.add(curr.toString());
-        for(int i=0;i<n;i++){
-            if(used[i]==true){
+    int count=0;
+    public void solve(int freq[]){
+        count++;
+        for(int i=0;i<freq.length;i++){
+            if(freq[i]==0){
                 continue;
             }
-            // Do
-            used[i]=true;
-            curr.append(tiles.charAt(i));
-            //Explore
-            if(solve(tiles,curr,set,used)){
-                return true;
-            }
-            // Undo
-            used[i]=false;
-            curr.deleteCharAt(curr.length()-1);
+            freq[i]--;
+            solve(freq);
+            freq[i]++;
         }
-        return false;
-     }
+    }
     public int numTilePossibilities(String tiles) {
-        n=tiles.length();
-        Set<String>set=new HashSet<>();
-        boolean used[]=new boolean[n];
-        StringBuilder curr=new StringBuilder();
-        solve(tiles,curr,set,used);
-        return set.size()-1;
+        int freq[]=new int[26];
+        int n=tiles.length();
+        for(int i=0;i<n;i++){
+            freq[tiles.charAt(i)-'A']++;
+        }
+        solve(freq);
+        return count-1;
     }
 }
