@@ -4,7 +4,11 @@ class Solution {
         int len = curr.length();
         return len < 2 || curr.charAt(len - 1) != curr.charAt(len - 2);
     }
-    public void solve(int n,StringBuilder curr,int freq[]){
+    public void solve(int n,StringBuilder curr,int freq[],int k){
+        if(ans.size()>=k){
+            return;
+        }
+
         if(curr.length()==n){
             ans.add(curr.toString());
             return;
@@ -20,7 +24,7 @@ class Solution {
 
                 //explore
                 if(isValid(curr)){
-                    solve(n,curr,freq);
+                    solve(n,curr,freq,k);
                 }
 
                 //undo
@@ -32,7 +36,7 @@ class Solution {
         int freq[]=new int[3];
         ans=new ArrayList<>();
         Arrays.fill(freq,n);
-        solve(n,new StringBuilder(),freq);
+        solve(n,new StringBuilder(),freq,k);
         return ans.size() >= k ? ans.get(k - 1) : "";
     }
 }
