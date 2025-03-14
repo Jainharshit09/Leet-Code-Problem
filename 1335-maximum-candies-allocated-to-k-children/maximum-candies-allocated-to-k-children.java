@@ -1,17 +1,4 @@
 class Solution {
-        private boolean canDistr(int[] candies, int mid, long k) {
-        int n = candies.length;
-
-        for (int i = 0; i < n; i++) {
-            k -= candies[i] / mid;
-
-            if (k <= 0) {
-                return true;
-            }
-        }
-
-        return k <= 0;
-    }
     public int maximumCandies(int[] candies, long k) {
         int n=candies.length;
         long total=0;
@@ -24,16 +11,19 @@ class Solution {
             return 0;
         }
         int l=1;
-        int r=max;
         int ans=0;
-        while(l<=r){
-            int mid=l+(r-l)/2;
-            if (canDistr(candies, mid, k)){
+        while(l<=max){
+            int mid=(l+max)/2;
+            long count=0;
+            for(int i=0;i<n;i++){
+                count+=candies[i]/mid;
+            }
+            if(count>=k){
                 ans=mid;
                 l = mid + 1;
             }
             else {
-                r=mid-1;
+                max=mid-1;
             }
         }
         return ans;
