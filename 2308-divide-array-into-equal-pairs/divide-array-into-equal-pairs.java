@@ -1,19 +1,15 @@
+import java.util.Arrays;
+
 class Solution {
     public boolean divideArray(int[] nums) {
-        HashMap<Integer,Integer>map=new HashMap<>();
-        int count=0;
-        for(int i=0;i<nums.length;i++){
-            if(map.containsKey(nums[i])){
-                count++;
-                map.remove(nums[i]);
+        Arrays.sort(nums);
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] != nums[i - 1]) {
+                return false;
             }
-            else{
-                map.put(nums[i],1);
-            }
+            i++;
         }
-        if(count==nums.length/2){
-            return true;
-        }
-        return false;
+        
+        return true;
     }
 }
