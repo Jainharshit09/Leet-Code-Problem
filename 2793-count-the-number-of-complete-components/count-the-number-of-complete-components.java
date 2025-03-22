@@ -19,7 +19,7 @@ class Solution {
                 }
             }
         }
-         return (vertex * (vertex- 1)) / 2 == edge/ 2;
+         return (vertex * (vertex- 1)) == edge;
     }
     public int countCompleteComponents(int n, int[][] edges) {
          HashMap<Integer,List<Integer>>adj=new HashMap<>();
