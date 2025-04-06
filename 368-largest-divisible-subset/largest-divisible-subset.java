@@ -3,7 +3,6 @@ class Solution {
         Arrays.sort(nums);
         int[] dp = new int[nums.length];
         Arrays.fill(dp, 1);
-
         int[] prevIdx = new int[nums.length];
         Arrays.fill(prevIdx, -1);
         int lastChosenIdx = 0;
