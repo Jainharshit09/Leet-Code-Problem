@@ -47,7 +47,9 @@ class Solution {
             adj.computeIfAbsent(v, k -> new ArrayList<>()).add(u);
         }
         int result[]=new int[n];
-        for(int i=0;i<n;i++){ result[i]=bfs(i,adj,d,n);}
+        for(int i=0;i<n;i++){ result[i]=bfs(i,adj,d,n);
+                            // result[i]=dfs(i,adj,d,-1);
+                            }
         return result;
         
     }
