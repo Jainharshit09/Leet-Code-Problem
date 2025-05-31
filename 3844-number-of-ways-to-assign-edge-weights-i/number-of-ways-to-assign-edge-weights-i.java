@@ -24,6 +24,8 @@ class Solution {
         int maxDepth[]=new int[1];
         maxDepth[0]=0;
         dfs(1,adj,-1,0,maxDepth);
+
+        // rather than calling in maxdepth we can use binary exponatation also there it will solve in log n
         int result=1;
         for(int i=1;i<maxDepth[0];i++){
             result=(result*2)%MOD;
