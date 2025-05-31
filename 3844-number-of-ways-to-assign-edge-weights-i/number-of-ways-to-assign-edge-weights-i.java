@@ -1,4 +1,8 @@
 class Solution {
+    // create a graph
+    // traverse the dfs
+    //find max depth 
+    //max depht having same edges having 2 way 1 oe 2 select odd way means 2^d/2 give me odd ways
     int MOD=1000000007;
     public void dfs(int curr, HashMap<Integer,List<Integer>>adj,int parent,int depth,int maxDepth[]){
         maxDepth[0]=Math.max(depth,maxDepth[0]);
