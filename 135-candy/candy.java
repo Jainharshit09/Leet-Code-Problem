@@ -24,6 +24,7 @@ class Solution {
                 i++;
                 candy+=dip;
             }
+            //couting two times in increasing and decreasing of peak value
             candy-=Math.min(dip,peak);
         }
         return candy;
