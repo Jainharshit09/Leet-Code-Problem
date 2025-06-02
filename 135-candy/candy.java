@@ -1,22 +1,31 @@
 class Solution {
-    public int candy(int[] ratings) {
-        int n = ratings.length;
-        int ans[] = new int[n];
-        Arrays.fill(ans, 1);
-        for (int i = 1; i < n; i++) {
-            if (ratings[i] > ratings[i - 1]) {
-                ans[i]=ans[i-1]+1;
+    //solve in o(n) and o(1) not using store the candides rather we see if we peak and drop 
+    public int candy(int[] rating) {
+        int n=rating.length;
+        int candy=n;
+        int i=1;
+        while(i<n){
+            int peak=0;
+            if(rating[i]==rating[i-1]){
+                i++;
+                continue;
             }
-        }
-        for(int i=n-2;i>=0;i--){
-            if(ratings[i]>ratings[i+1]){
-                ans[i]=Math.max(ans[i],ans[i+1]+1);
+            while(rating[i]>rating[i-1]){
+                peak++;
+                i++;
+                candy+=peak;
+                if(i==n){
+                    return candy;
+                }
             }
+            int dip=0;
+            while(i<n && rating[i]<rating[i-1]){
+                dip++;
+                i++;
+                candy+=dip;
+            }
+            candy-=Math.min(dip,peak);
         }
-        int result=0;
-        for(int i=0;i<ans.length;i++){
-            result+=ans[i];
-        }
-        return result;
+        return candy;
     }
 }
