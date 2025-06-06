@@ -1,5 +1,6 @@
 class Solution {
-    // in that find the next smallest character and push in stack then check with minchar if it small then store in ans till we can got bigger and than in end also need to check stack is empty or not if not then store in ans
+    // in that find the next smallest character and push in stack then check with minchar if it small then store in ans till we can got bigger and than in end also need to check stack is empty or not if not then store in ans 
+    // tc is o(N+N+N)=O(3N)
     public String robotWithString(String s) {
         int n=s.length();
         char[] nsl=new char[n];
