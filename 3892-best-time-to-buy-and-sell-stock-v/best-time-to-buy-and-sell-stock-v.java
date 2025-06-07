@@ -6,6 +6,7 @@ class Solution {
     // in sell only do buy or nothing state 2
     // in nothing we can buy sell nothing is 0 state
     // remember if on last index than check the state also beacuse either 3 chances occuer like for 0 ,1,2 sell buy nothing
+    // Time Complexity: O(n * k)
 
     public long solve(int[] prices, int i, int k, int state) {
         if (k == 0) return 0;
