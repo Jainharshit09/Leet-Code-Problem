@@ -3,7 +3,7 @@
 // range is overall sum of that array
 //s2=range-s1
 //|range-2S1|min
-//remember doing that range like range is 10 then 0-10 the element after mid automatically comde from that 10-1=9,similar till 5
+//remember doing that range like range is 10 then 0-10 the element after mid automatically come from that 10-1=9,similar till 5
 //so this problem is break down subset sum problem 
 // traverse the last row and those are positive we take that and till range/2 not more that becuse ans will come again
 
