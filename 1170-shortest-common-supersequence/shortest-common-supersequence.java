@@ -27,6 +27,7 @@ class Solution {
                    j--;
                 }
                 else{
+                    // we doin that which one lcs give max move there
                     if(dp[i-1][j]>dp[i][j-1]){
                          sb.insert(0,text1.charAt(i-1));
                          i--;
