@@ -1,30 +1,14 @@
-// normal recursion problem
-// check in set that string present or not
-// present return  do for next one using rec will give 
 class Solution {
-    Boolean dp[];
-    int n;
-    public boolean solve(String s,int idx, List<String> wordDict){
-        if(idx>=n){
-            return true;
-        } 
-        if(wordDict.contains(s)){
-            return true;
-        }
-        if(dp[idx]!=null){
-            return dp[idx];
-        }
-        for(int end=idx+1;end<=n;end++){
-            String str=s.substring(idx,end);
-            if(wordDict.contains(str) && solve(s,end,wordDict)){
-                return dp[idx]=true;
+    public boolean wordBreak(String s, List<String> wordDict) {
+        boolean dp[]=new boolean[s.length()+1];
+        dp[0]=true;
+        Set<String> wordSet = new HashSet<>();
+        wordSet.addAll(wordDict);
+        for(int idx=1;idx<dp.length;idx++){
+            for(int end=1;end<=idx;end++){
+                dp[idx]=dp[idx]||(dp[idx-end] && wordSet.contains(s.substring(idx-end,idx)));
             }
         }
-        return dp[idx]=false;
-    }
-    public boolean wordBreak(String s, List<String> wordDict) {
-        n=s.length();
-        dp=new Boolean[301];
-        return solve(s,0,wordDict);
+        return dp[s.length()];
     }
 }
