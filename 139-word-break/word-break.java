@@ -1,55 +1,30 @@
-class TrieNode{
-    TrieNode children[];
-    boolean endOfWord;
-    public TrieNode(){
-        this.children=new TrieNode[26];
-        this.endOfWord=false;
-    }
-}
-class Trie{
-    TrieNode root;
-    public Trie(){
-        this.root=new TrieNode();
-    }
-    public void insert(String word){
-        TrieNode curr=root;
-        for(int i=0;i<word.length();i++){
-            int idx=word.charAt(i)-'a';
-            if(curr.children[idx]==null){
-                curr.children[idx]=new TrieNode();
-            }
-            curr=curr.children[idx];
-        }
-        curr.endOfWord=true;
-    }
-        public TrieNode getRoot() {
-        return root;
-    }
-}
+// normal recursion problem
+// check in set that string present or not
+// present return  do for next one using rec will give 
 class Solution {
-    public boolean wordBreak(String s, List<String> wordDict) {
-        Trie node=new Trie();
-        int n=wordDict.size();
-        for(int i=0;i<n;i++){
-            node.insert(wordDict.get(i));
+    Boolean dp[];
+    int n;
+    public boolean solve(String s,int idx, List<String> wordDict){
+        if(idx>=n){
+            return true;
+        } 
+        if(wordDict.contains(s)){
+            return true;
         }
-        int m=s.length();
-        boolean dp[]=new boolean[m+1];
-        dp[0]=true;
-        for(int i=0;i<m;i++){
-             if (!dp[i]) continue;
-            TrieNode trie = node.getRoot();
-            for(int j=i;j<m;j++){
-                int idx=s.charAt(j)-'a';
-                if(trie.children[idx]==null){
-                    break;
-                }
-                trie=trie.children[idx];
-                if(trie.endOfWord==true){
-                    dp[j+1]=true;
-                }
+        if(dp[idx]!=null){
+            return dp[idx];
+        }
+        for(int end=idx+1;end<=n;end++){
+            String str=s.substring(idx,end);
+            if(wordDict.contains(str) && solve(s,end,wordDict)){
+                return dp[idx]=true;
             }
         }
-        return dp[m];
+        return dp[idx]=false;
+    }
+    public boolean wordBreak(String s, List<String> wordDict) {
+        n=s.length();
+        dp=new Boolean[301];
+        return solve(s,0,wordDict);
     }
 }
