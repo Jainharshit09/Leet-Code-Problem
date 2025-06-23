@@ -1,3 +1,5 @@
+// in which we check the till last index and string is valid or not
+// means for that we do idx-end;
 class Solution {
     public boolean wordBreak(String s, List<String> wordDict) {
         boolean dp[]=new boolean[s.length()+1];
