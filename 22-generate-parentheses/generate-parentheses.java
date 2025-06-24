@@ -2,6 +2,8 @@
 //find the total  generateParenthesis of n
 //we can need correct well Parenthesis always start from ( and end with )
 //we can having open and close if both equal or && sum of both =2*n add in result and return from that
+//So the total number of all possible strings of length 2n is:2^(2n) = 4^n
+// we finding only corret one so (4^n)/n
 class Solution {
     public void solve(int open,int close,String s, int n,List<String>res){
         if(open==close && open+close==2*n){
