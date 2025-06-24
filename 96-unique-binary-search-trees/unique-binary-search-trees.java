@@ -2,17 +2,19 @@
 // need to find combination
 // for tree combination we can use catalan number 
 // for that 2n!/(n+1)!*n! either use that 
-// or n=3 we can write C0*C2+C1*C1+C2*C0
+import java.math.BigInteger;
+
 class Solution {
     public int numTrees(int n) {
-        int dp[]=new int [n+1];
-        dp[0]=1;
-        dp[1]=1;
-        for(int i=2;i<dp.length;i++){
-            for(int j=0;j<i;j++){
-                dp[i]+=dp[j]*dp[i-j-1];
-            }
+        // We'll store factorials from 0 to 2n
+        BigInteger[] fact = new BigInteger[2 * n + 1];
+        fact[0] = BigInteger.ONE;
+        for (int i = 1; i <= 2 * n; i++) {
+            fact[i] = fact[i - 1].multiply(BigInteger.valueOf(i));
         }
-        return dp[n];
+        // Catalan number C(n) = (2n)! / ((n+1)! * n!)
+        BigInteger catalan = fact[2 * n].divide(fact[n + 1].multiply(fact[n]));
+
+        return catalan.intValue();
     }
 }
