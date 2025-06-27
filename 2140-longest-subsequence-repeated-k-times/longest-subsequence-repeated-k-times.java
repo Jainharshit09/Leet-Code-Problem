@@ -6,6 +6,8 @@
 //in which same first subseq we find we start with j and till j*k at the time comparing we do j%m(length of subseq)
 //time complexity is o(n)*(n/k)! beacuse n/k! we are finding all the string and checking 
 
+// we can also more optimize the backtracking like we know maxLen we it may be ans so rathe passing the maxlen we can create a loop from maxLen to 1 and passing that len 
+
 
 class Solution {
     String result="";
