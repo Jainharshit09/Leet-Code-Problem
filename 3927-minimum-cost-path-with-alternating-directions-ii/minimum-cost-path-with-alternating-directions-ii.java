@@ -19,7 +19,7 @@ class Solution {
         long ans;
 
         if (parity == 1) { 
-            //we use i+2 and j+1  because  calculating the cost of the destination cell
+            //we use i+2 and j+1  because  calculating the cost of the destination cell i+1+1 that why writing i+2
             long r = rec(waitCost, i + 1, j, parity ^ 1);
             if (r != Long.MAX_VALUE) r += (i + 2) * (j + 1);
             long d = rec(waitCost, i, j + 1, parity ^ 1);
