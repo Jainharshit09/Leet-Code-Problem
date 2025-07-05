@@ -6,9 +6,10 @@ class Solution {
            ans[ arr[i]]++;
         }
         int result=-1;
-        for(int i=1;i<501;i++){
+        for(int i=500;i>=1;i--){
             if(i==ans[i]){
                 result=i;
+                break;
             }
         }
         return result;
