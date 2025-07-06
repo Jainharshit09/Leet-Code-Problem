@@ -36,9 +36,9 @@ class Solution {
             root.union(edge[0],edge[1]);
         }
         for(int i=1;i<=c;i++){
-            int comp=root.find(i);
-            adj.putIfAbsent(comp, new TreeSet<>());
-            adj.get(comp).add(i);
+            int parent=root.find(i);
+            adj.putIfAbsent(parent, new TreeSet<>());
+            adj.get(parent).add(i);
         }
         ArrayList<Integer>list=new ArrayList<>();
         for(int i=0;i<queries.length;i++){
@@ -48,16 +48,16 @@ class Solution {
                 if(check[node]==true)list.add(node);
                 else{
                     //finding parent of that node and smallest one from that
-                    int p=root.find(node);
-                    TreeSet<Integer>set=adj.get(p);
+                    int parent=root.find(node);
+                    TreeSet<Integer>set=adj.get(parent);
                     list.add(set.isEmpty()? -1 : set.first());
                 }
             }
             else{
                 if(check[node]==true){
                     check[node]=false;
-                    int p=root.find(node);
-                    adj.get(p).remove(node);
+                    int parent=root.find(node);
+                    adj.get(parent).remove(node);
                 }
 
             }
