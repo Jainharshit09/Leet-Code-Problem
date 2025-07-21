@@ -1,3 +1,8 @@
+// first go with two pointer but fail in at same char both s1 and s2 having same
+// now same will give me choice which one i need to choose
+//this means choice is there go recursion/dp
+// like continue with 1st index and move with 2nd index and same vice versa
+// which one give me true return that remember doing or in the end because either taking s1 or s2 one will give true
 class Solution {
     Boolean dp[][];
     public boolean dfs(int i,int j,String s1,String s2,String s3){
