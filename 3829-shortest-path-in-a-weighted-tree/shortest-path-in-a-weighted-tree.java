@@ -47,7 +47,8 @@ class Solution {
         // Find child in u-v
         int child = (parent[u] == v) ? u : v;
 
-        rangeAdd(inTime[child], outTime[child]-1, delta);
+        add(inTime[child], delta);
+        add(outTime[child], -delta);
     }
 
     //precompute the first all shortest between node1 to x
