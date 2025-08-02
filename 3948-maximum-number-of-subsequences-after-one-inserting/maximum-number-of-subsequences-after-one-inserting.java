@@ -50,7 +50,7 @@ class Solution {
                 ansT+=(suffixT[i+1]+1)*prefixL[i];
             }
             else{
-                // finding best position of c
+                // finding best position of c at every position
                 bestC=Math.max(bestC,prefixL[i]*suffixT[i]);
             }
         }
