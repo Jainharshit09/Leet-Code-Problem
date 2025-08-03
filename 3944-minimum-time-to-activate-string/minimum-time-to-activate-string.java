@@ -10,23 +10,24 @@
 class Solution {
     long total;
     public boolean isPossible(String s,int order[],int k,int mid){
-        int n=s.length();
-        int takeTillMid[]=new int[mid+1];
+        int arr[]=new int[mid+1];
         for(int i=0;i<=mid;i++){
-            takeTillMid[i]=order[i];
+            arr[i]=order[i];
         }
-        Arrays.sort(takeTillMid);
         long nonstar=0;
         int start=0;
-        for(int idx:takeTillMid){
-            long len=idx-start;
+        Arrays.sort(arr);
+        // finding non-star substring from left side
+        for(int x:arr){
+            long len=x-start;
             nonstar+=(len*(len+1))/2;
-            start=idx+1;
+            //it will find next point after *
+            start=x+1;
         }
+        // after last * how mamy remaining substring will there means on right side 
         long len=s.length()-start;
         nonstar+=(len*(len+1))/2;
         return (total-nonstar)>=k;
-
     }
     public int minTime(String s, int[] order, int k) {
         int n=s.length();
