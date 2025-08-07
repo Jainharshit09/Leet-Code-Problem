@@ -1,31 +1,32 @@
+//using dp we can easily solve
+//having 2 choice if i==n-1 && j==m-1 than return 1 
+//in dp store right+down 
+// basic recusrion and dp question
+
+
+//now i understand that these problem can solve by permutation and combination
+//because having 2 choice down and right 
+//now find how we can do using pnc the formula of pnc is create like n!/r!(n-r)!
+//n=m+n-2 and r=min(n,m)-1;
+
+
+
+import java.math.BigInteger;
+
 class Solution {
-    int dp[][];
-    public int solve(int i,int j,int m,int n){
-        if(i==m-1 && j==n-1){
-            return 1;
-        }
-        if(i<0|| i>m || j<0 || j>n ){
-            return 0;
-        }
-       if (dp[i][j] != -1) {
-            return dp[i][j];
-        }
-        int right=solve(i,j+1,m,n);
-        int down=solve(i+1,j,m,n);
-        return dp[i][j]=right+down;
-    }
     public int uniquePaths(int m, int n) {
-        dp=new int[m][n];
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                if(i==0 ||j==0){
-                    dp[i][j]=1;
-                }
-                else{
-                    dp[i][j]=dp[i-1][j]+dp[i][j-1];
-                }
-            }
+        int total = m + n - 2;
+        int r = Math.min(m - 1, n - 1);
+
+        BigInteger[] fact = new BigInteger[total + 1];
+        fact[0] = BigInteger.ONE;
+        for (int i = 1; i <= total; i++) {
+            fact[i] = fact[i - 1].multiply(BigInteger.valueOf(i));
         }
-        return dp[m-1][n-1];
+
+        BigInteger numerator = fact[total];
+        BigInteger denominator = fact[r].multiply(fact[total - r]);
+
+        return numerator.divide(denominator).intValue();
     }
 }
