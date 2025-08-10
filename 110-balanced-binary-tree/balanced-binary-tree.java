@@ -16,6 +16,7 @@
  //calculate the height of tree
  // than check abs(right-left)<=1 than we called it is bianry tree 
  // using sinple recusion
+ //this will solve in O(N);
 class Solution {
     public int height(TreeNode root){
         if(root==null)return 0;
