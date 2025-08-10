@@ -13,8 +13,15 @@
  *     }
  * }
  */
+ //create a undirected graph
+ //store all leaf node
+ //thrn find shotrest distance usinf bfs
+ // in which we run till distance because if go more level means waste of time
+ // curr!=leaf and set.contains leaf count++
+ //remember the distance is add 2times because of unidrected graph 
+ //in end count/2;
 class Solution {
-    public void maketree(TreeNode root,TreeNode prev, Map<TreeNode,List<TreeNode>> adj,Set<TreeNode> leaf){
+      public void maketree(TreeNode root,TreeNode prev, Map<TreeNode,List<TreeNode>> adj,Set<TreeNode> leaf){
         if(root==null){
             return;
         }
@@ -30,33 +37,36 @@ class Solution {
     }
     public int countPairs(TreeNode root, int distance) {
         Map<TreeNode,List<TreeNode>> adj=new HashMap<>();
-        Set<TreeNode> leaf=new HashSet<>();
-        maketree(root,null,adj,leaf);
+        Set<TreeNode> leafs=new HashSet<>();
+        maketree(root,null,adj,leafs);
         int count=0;
-        for(TreeNode leafs:leaf){
-            Queue<TreeNode> q = new LinkedList<>();
-            Set<TreeNode> vis = new HashSet<>();
-            q.add(leafs);
-            vis.add(leafs);
+
+        //for every leaf to count how many good leaf node are there
+        for(TreeNode leaf:leafs){
+
+            //finding shortest distance using bfs
+            Queue<TreeNode>q=new LinkedList<>();
+            Set<TreeNode>vis=new HashSet<>();
+            q.add(leaf);
+            vis.add(leaf);
+
+            //this is optimal way to go only distance level
             for(int i=0;i<=distance;i++){
                 int size=q.size();
                 while(size-->0){
                     TreeNode curr=q.poll();
-                    if(curr!=leafs && leaf.contains(curr)){
-                        count++;
-                    }
-                    for(TreeNode neighbours:adj.getOrDefault(curr, new ArrayList<>())){
-                        if(!vis.contains(neighbours)){
-                            q.add(neighbours);
-                            vis.add(neighbours);
+
+                    
+                    if(curr!=leaf && leafs.contains(curr))count++;
+                    for(TreeNode ngbr:adj.getOrDefault(curr,new ArrayList<>())){
+                        if(!vis.contains(ngbr)){
+                            q.add(ngbr);
+                            vis.add(ngbr);
                         }
                     }
-
                 }
             }
-
         }
         return count/2;
-
     }
 }
