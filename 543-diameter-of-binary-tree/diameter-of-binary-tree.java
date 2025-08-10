@@ -14,21 +14,23 @@
  * }
  */
 class Solution {
-    int res;
+    int result;
     public int diameter(TreeNode root){
-        if(root==null){
-            return 0;
-        }
+        //base condition
+        if(root==null)return 0 ;
+        //intement
         int left=diameter(root.left);
         int right=diameter(root.right);
-        int height=Math.max(left,right)+1;
-        int ans=left+right;
-        res=Math.max(res,ans);
-        return height;
+        //update work
+        int temp=Math.max(left,right)+1;
+        int ans=Math.max(left+right+1,temp);
+        result=Math.max(ans,result);
+        //we need return temp because of recursion
+        return temp;
     }
     public int diameterOfBinaryTree(TreeNode root) {
-        res=0;
+        result=Integer.MIN_VALUE;
         diameter(root);
-        return res;
+        return result-1;
     }
 }
