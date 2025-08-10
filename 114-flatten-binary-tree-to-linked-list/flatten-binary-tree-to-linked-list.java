@@ -13,21 +13,26 @@
  *     }
  * }
  */
+
+//WE CAN SOLVE USING MORRIS TRAVERSAL
+//in which check there is left go left right and connect to root.right with 
+// and root.right will curr.left 
+// and move root=root.right
+
 class Solution {
     public void flatten(TreeNode root) {
-        List<TreeNode>nodeList=new ArrayList<>();
-        preorder(root,nodeList);
-        for(int i=1;i<nodeList.size();i++){
-            TreeNode prev=nodeList.get(i-1);
-            TreeNode curr=nodeList.get(i);
-            prev.left=null;
-            prev.right=curr;
+        TreeNode curr=root;
+        while(curr!=null){
+            if(curr.left!=null){
+                TreeNode leftPrev=curr.left;
+                while(leftPrev.right!=null){
+                    leftPrev=leftPrev.right;
+                }
+                leftPrev.right=curr.right;
+                curr.right=curr.left;
+                curr.left=null;
+            }
+            curr=curr.right;
         }
-    }
-    public void preorder(TreeNode root,List<TreeNode>nodeList){
-        if(root==null)return;
-        nodeList.add(root);
-        preorder(root.left,nodeList);
-        preorder(root.right,nodeList);
     }
 }
