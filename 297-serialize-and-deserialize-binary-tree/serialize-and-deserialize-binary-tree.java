@@ -7,37 +7,41 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
-public class Codec {
 
+ //in serialize we can do create a string gor null use # and add , after every value 
+ // to deserialize we use same concept used to check preodrder of serialize like that 
+ //for deserialzie take a value and if we find , than insert in tree
+ //move to it
+public class Codec {
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
-        if(root==null){
+          if(root==null){
             return "";
         }
-        Queue<TreeNode> q=new LinkedList<>();
         StringBuilder str=new StringBuilder();
+        Queue<TreeNode>q=new LinkedList<>();
         q.add(root);
         while(!q.isEmpty()){
-            TreeNode node=q.poll();
-            if(node==null){
-                str.append("# ");
+            TreeNode curr=q.poll();
+            if(curr==null){
+                str.append("#");
+                str.append(",");
                 continue;
             }
-            str.append(node.val+" ");
-            q.add(node.left);
-            q.add(node.right);
+            str.append(curr.val);
+            str.append(",");
+            q.add(curr.left);
+            q.add(curr.right);
         }
         return str.toString();
     }
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-        if(data.length()==0){
-            return null;
-        }
-        Queue<TreeNode> q=new LinkedList<>();
-        String values[]=data.split(" ");
+        if(data.length()==0)return null;
+        String values[]=data.split(",");
         TreeNode root=new TreeNode(Integer.parseInt(values[0]));
+        Queue<TreeNode>q=new LinkedList<>();
         q.add(root);
         for(int i=1;i<values.length;i++){
             TreeNode parent=q.poll();
