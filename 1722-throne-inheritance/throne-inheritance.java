@@ -1,3 +1,8 @@
+//easy question
+// this is toward the hashmap and dfs
+// like store all king and child in map
+// death will add in store
+// for order call dfs it only check that root is not in set other wise add in list
 class ThroneInheritance {
     HashMap<String,List<String>>map;
     Set<String>set;
@@ -11,7 +16,7 @@ class ThroneInheritance {
     
     public void birth(String parentName, String childName) {
         map.get(parentName).add(childName);
-         map.putIfAbsent(childName,new ArrayList<>());
+        map.putIfAbsent(childName,new ArrayList<>());   
     }
     
     public void death(String name) {
