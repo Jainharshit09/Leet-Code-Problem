@@ -1,32 +1,24 @@
+// we can optimize without taking
+// use array and 3 pointer
 
 class Solution {
     public int nthUglyNumber(int n) {
-        if (n == 1) {
-            return 1;
+        int dp[]=new int[n];
+        dp[0]=1;
+        int i2=0;
+        int i3=0;
+        int i5=0;
+        for(int i=1;i<n;i++){
+            int nexti2=2*dp[i2];
+            int nexti3=3*dp[i3];
+            int nexti5=5*dp[i5];
+
+            int next=Math.min(nexti2,Math.min(nexti3,nexti5));
+            dp[i]=next;
+            if(next==nexti2)i2++;
+            if(next==nexti3)i3++;
+            if(next==nexti5)i5++;
         }
-        
-        int[] arr = new int[n];
-        PriorityQueue<Long> pq = new PriorityQueue<>();
-        Set<Long> set = new HashSet<>();
-        pq.add(1L);
-        set.add(1L);
-        
-        int index = 0;
-        while (index < n) {
-            long curr = pq.poll();
-            arr[index++] = (int) curr;
-            
-            if (set.add(curr * 2)) {
-                pq.add(curr * 2);
-            }
-            if (set.add(curr * 3)) {
-                pq.add(curr * 3);
-            }
-            if (set.add(curr * 5)) {
-                pq.add(curr * 5);
-            }
-        }
-        
-        return arr[n - 1];
+        return dp[n-1];
     }
 }
