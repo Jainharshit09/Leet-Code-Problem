@@ -1,23 +1,32 @@
-//use hashmap to store the count
-//after that take element having maximun count of top k will be added in pq and tracverse the pq and get the ans;
+//like store in hashmap
+// than we doing in reverse order like not using heap we can create list<Integer>[] 
+// all we get the freq and at that index store the value
 
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
-        HashMap<Integer,Integer>map=new HashMap<>();
         int n=nums.length;
+        List<Integer>[]min=new List[n+1];
+        HashMap<Integer,Integer>map=new HashMap<>();
         for(int i=0;i<n;i++){
             map.put(nums[i],map.getOrDefault(nums[i],0)+1);
-        }  
-        PriorityQueue<Integer>pq=new PriorityQueue<>(
-             (a, b)-> map.get(a)-map.get(b)
-        );
-        for(int num:map.keySet()){
-            pq.add(num);
-            if(pq.size()>k)pq.poll();
         }
-        int ans[]=new int [k];
-        for(int i=0;i<k;i++){
-            ans[i]=pq.poll();
+        for(Map.Entry<Integer,Integer>entry:map.entrySet()){
+            int value=entry.getKey();
+            int freq=entry.getValue();
+            if(min[freq]==null){
+                min[freq]=new ArrayList<>();
+            }
+            min[freq].add(value);
+        }
+        int ans[]=new int[k];
+         int index = 0;
+        for(int i=min.length-1;i >= 0 && index < k;i--){
+             if (min[i] != null) {
+                for(int val:min[i]){
+                    ans[index++]=val;
+                    if(index==k)break;
+                }
+             }
         }
         return ans;
     }
