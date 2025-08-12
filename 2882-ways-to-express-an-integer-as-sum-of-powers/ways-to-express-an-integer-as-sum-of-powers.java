@@ -39,7 +39,7 @@ class Solution {
         while (binary_Exp(maxBase, x) <= n) {
             maxBase++;
         }
-        dp=new int[n+1][maxBase+2];
+        dp=new int[n+1][maxBase+1];
         for(int row[]:dp)Arrays.fill(row,-1);
         return solve(n,1,x);
     }
