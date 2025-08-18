@@ -1,36 +1,29 @@
+//like we can go in circluar motion from in clock wise
+// we can solve using queue store both in different queue
+// after that which one is next we remove that and add again in it which one is not delete we add in q in end any q will be empty return it oppisite will win
+
 class Solution {
-    int n;
-    public void removeOtherParty(String senate,boolean taken[],char del,int idx){
-        while(true){
-            if(senate.charAt(idx)==del && taken[idx]==false){
-                taken[idx]=true;
-                break;
-            }
-            idx=(idx+1)%n;
-        }
-    }
     public String predictPartyVictory(String senate) {
-        n=senate.length();
-        boolean taken[]=new boolean[n];
-        int R_count=0;
+        int n=senate.length();
+        Queue<Integer>R_count=new LinkedList<>();
+        Queue<Integer>D_count=new LinkedList<>();
         for(int i=0;i<n;i++){
-            if(senate.charAt(i)=='R')R_count++;
-        }
-        int D_count=n-R_count;
-        int idx = 0;
-        while(R_count!=0 && D_count!=0){
-            if(!taken[idx]){
-                if(senate.charAt(idx)=='R'){
-                    removeOtherParty(senate,taken,'D',idx);
-                    D_count--;
-                }
-                else{
-                    removeOtherParty(senate,taken,'R',idx);
-                    R_count--;
-                }
+            char ch=senate.charAt(i);
+            if(ch=='R')R_count.add(i);
+            else{
+                D_count.add(i);
             }
-            idx=(idx+1)%n;
         }
-        return R_count==0 ? "Dire":"Radiant";
+        while(!R_count.isEmpty() && !D_count.isEmpty()){
+            int r_pos=R_count.poll();
+            int d_pos=D_count.poll();
+            if(r_pos<d_pos){
+                R_count.add(r_pos+n);
+            }
+            else{
+                D_count.add(d_pos+n);
+            }
+        }
+        return R_count.isEmpty()?"Dire":"Radiant";
     }
 }
