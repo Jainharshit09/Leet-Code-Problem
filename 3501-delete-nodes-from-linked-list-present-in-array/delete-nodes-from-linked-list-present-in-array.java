@@ -10,16 +10,10 @@
  */
 class Solution {
     public ListNode modifiedList(int[] nums, ListNode head) {
-        Set<Integer> set=new HashSet<>();
-        for(int i =0;i<nums.length;i++){
-            set.add(nums[i]);
-        }
-        while(head!=null && set.contains(head.val)){
-                head=head.next;    
-        }
-        if(head==null){
-            return null;
-        }
+        Set<Integer>set=new HashSet<>();
+        for(int i=0;i<nums.length;i++)set.add(nums[i]);
+        while(head!=null && set.contains(head.val))head=head.next;
+        if(head==null)return head;
         ListNode curr=head;
         while(curr.next!=null){
             if(set.contains(curr.next.val)){
